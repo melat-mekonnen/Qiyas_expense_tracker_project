@@ -16,7 +16,7 @@ Track your daily expenses, view dashboard statistics, and manage records — all
 | **GraphQL Yoga** | GraphQL server (API route) |
 | **GraphQL** | API query language |
 | **Tailwind CSS** | Styling |
-| **In-memory array** | Data storage (no database) |
+
 
 ---
 
@@ -219,7 +219,7 @@ mutation {
 1. **Frontend** — React pages use Apollo Client hooks (`useQuery`, `useMutation`) to fetch and modify data.
 2. **API Route** — `/api/graphql` runs GraphQL Yoga, which processes queries and mutations.
 3. **Resolvers** — Functions in `graphql/resolvers.js` read/write the in-memory array in `lib/store.js`.
-4. **No Database** — Data is stored in a JavaScript array and resets when the server restarts.
+
 
 ---
 
@@ -233,14 +233,6 @@ mutation {
 - Loading spinners and error handling
 - Beginner-friendly code with comments in every file
 
----
-
-## Notes
-
-- **No authentication** — anyone can access all pages
-- **No database** — data lives in memory only
-- Data resets when you restart the dev server
-- Sample expenses are pre-loaded in `lib/store.js` for demo purposes
 
 ---
 
