@@ -16,7 +16,7 @@ Track your daily expenses, view dashboard statistics, and manage records — all
 | **GraphQL Yoga** | GraphQL server (API route) |
 | **GraphQL** | API query language |
 | **Tailwind CSS** | Styling |
-| **In-memory array** | Data storage (no database) |
+
 
 ---
 
