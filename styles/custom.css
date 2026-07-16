@@ -1,0 +1,29 @@
+/**
+ * styles/custom.css
+ * Additional custom styles for the Expense Tracker app.
+ * Imported alongside Tailwind in app/globals.css.
+ */
+
+/* Smooth scrolling for the whole app */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Limit text to 2 lines with ellipsis */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Spinner animation (backup if Tailwind animate-spin is unavailable) */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
