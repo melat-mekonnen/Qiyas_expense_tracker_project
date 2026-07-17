@@ -1,11 +1,14 @@
 /**
  * graphql/typeDefs.js
- * GraphQL schema type definitions.
- * Defines the shape of Expense data, queries, and mutations.
  */
 
 export const typeDefs = /* GraphQL */ `
-  # Expense model - represents a single expense record
+  type User {
+    id: ID!
+    name: String!
+    email: String!
+  }
+
   type Expense {
     id: ID!
     title: String!
@@ -15,15 +18,14 @@ export const typeDefs = /* GraphQL */ `
     description: String
   }
 
-  # Queries - read data from the server
   type Query {
+    me: User
     expenses: [Expense]
     expense(id: ID!): Expense
     expensesByCategory(category: String!): [Expense]
     totalExpense: Float
   }
 
-  # Mutations - create, update, or delete data
   type Mutation {
     addExpense(
       title: String!

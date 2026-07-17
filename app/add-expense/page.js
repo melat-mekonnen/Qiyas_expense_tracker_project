@@ -11,10 +11,22 @@ import { ADD_EXPENSE, GET_DASHBOARD_DATA, GET_EXPENSES } from "@/graphql/client"
 import ExpenseForm from "@/components/ExpenseForm";
 import Link from "next/link";
 import { classes } from "@/lib/theme";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function AddExpensePage() {
   const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
   const [addExpense, { loading }] = useMutation(ADD_EXPENSE);
+
+  if (authLoading) {
+    return <LoadingSpinner message="Loading..." />;
+  }
+
+  if (!user) {
+    return (
+      <div className={classes.error}>Please sign in to add expenses.</div>
+    );
+  }
 
   const handleSubmit = async (formData) => {
     try {
