@@ -12,6 +12,37 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import Link from "next/link";
 import { classes, getCategoryHex } from "@/lib/theme";
 
+function MoneyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 1v22" />
+      <path d="M17 5H9a3 3 0 0 0 0 6h6a3 3 0 0 1 0 6H7" />
+    </svg>
+  );
+}
+
+function ListIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 6h13" />
+      <path d="M8 12h13" />
+      <path d="M8 18h13" />
+      <path d="M3 6h.01" />
+      <path d="M3 12h.01" />
+      <path d="M3 18h.01" />
+    </svg>
+  );
+}
+
+function TagIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 12v6a2 2 0 0 1-2 2h-6l-8-8V4a2 2 0 0 1 2-2h6l8 8z" />
+      <path d="M7 7h.01" />
+    </svg>
+  );
+}
+
 export default function DashboardPage() {
   const { data, loading, error } = useQuery(GET_DASHBOARD_DATA);
 
@@ -41,18 +72,18 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <DashboardCard
           title="Total Expenses"
-          value={`$${totalExpense.toFixed(2)}`}
-          icon="💰"
+          value={`ETB ${totalExpense.toFixed(2)}`}
+          icon={<MoneyIcon />}
         />
         <DashboardCard
           title="Number of Expenses"
           value={expenses.length}
-          icon="📋"
+          icon={<ListIcon />}
         />
         <DashboardCard
           title="Categories Used"
           value={Object.keys(categoryTotals).length}
-          icon="🏷️"
+          icon={<TagIcon />}
         />
       </div>
 
@@ -93,7 +124,7 @@ export default function DashboardPage() {
                     />
                     <span className={`${classes.textMuted} truncate`}>{category}</span>
                     <span className={`${classes.textBody} font-medium ml-auto`}>
-                      ${amount.toFixed(2)}
+                      ETB {amount.toFixed(2)}
                     </span>
                   </div>
                 ))}
@@ -130,7 +161,7 @@ export default function DashboardPage() {
                     </p>
                   </div>
                   <p className={classes.amount}>
-                    ${expense.amount.toFixed(2)}
+                    ETB {expense.amount.toFixed(2)}
                   </p>
                 </div>
               ))}

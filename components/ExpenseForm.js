@@ -68,7 +68,7 @@ export default function ExpenseForm({
 
       <div>
         <label htmlFor="amount" className={classes.label}>
-          Amount ($) *
+          Amount (ETB) *
         </label>
         <input
           type="number"
