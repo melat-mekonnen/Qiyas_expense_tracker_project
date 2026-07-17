@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CATEGORIES, classes } from "@/lib/theme";
 
 function getTodayDate() {
@@ -22,18 +22,9 @@ export default function ExpenseForm({
     title: initialValues.title || "",
     amount: initialValues.amount || "",
     category: initialValues.category || "Food",
-    date: initialValues.date || "",
+    date: initialValues.date || getTodayDate(),
     description: initialValues.description || "",
   });
-
-  useEffect(() => {
-    if (!initialValues.date) {
-      setFormData((prev) => ({
-        ...prev,
-        date: prev.date || getTodayDate(),
-      }));
-    }
-  }, [initialValues.date]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
