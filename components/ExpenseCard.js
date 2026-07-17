@@ -38,7 +38,7 @@ export default function ExpenseCard({ expense, onDelete, deleting }) {
           </p>
         </div>
 
-        <p className={classes.amountLarge}>${expense.amount.toFixed(2)}</p>
+        <p className={classes.amountLarge}>ETB {expense.amount.toFixed(2)}</p>
       </div>
 
       <div className={`flex gap-2 mt-4 pt-4 border-t ${classes.divider}`}>
