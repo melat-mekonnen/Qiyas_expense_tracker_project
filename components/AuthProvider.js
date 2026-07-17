@@ -42,8 +42,23 @@ export default function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    refreshUser();
-  }, [refreshUser]);
+    const loadUser = async () => {
+      try {
+        const response = await fetch("/api/auth/me", {
+          credentials: "include",
+          cache: "no-store",
+        });
+        const data = await response.json();
+        setUser(data.user ?? null);
+      } catch {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUser();
+  }, []);
 
   const logout = useCallback(async () => {
     await fetch("/api/auth/logout", {

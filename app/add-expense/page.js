@@ -9,6 +9,7 @@ import { useMutation } from "@apollo/client/react";
 import { useRouter } from "next/navigation";
 import { ADD_EXPENSE, GET_DASHBOARD_DATA, GET_EXPENSES } from "@/graphql/client";
 import ExpenseForm from "@/components/ExpenseForm";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import Link from "next/link";
 import { classes } from "@/lib/theme";
 import { useAuth } from "@/components/AuthProvider";
