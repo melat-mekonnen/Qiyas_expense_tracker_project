@@ -9,13 +9,28 @@ import { useQuery } from "@apollo/client/react";
 import { GET_DASHBOARD_DATA } from "@/graphql/client";
 import DashboardCard from "@/components/DashboardCard";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { useAuth } from "@/components/AuthProvider";
 import Link from "next/link";
 import { classes, getCategoryHex } from "@/lib/theme";
 
 export default function DashboardPage() {
-  const { data, loading, error } = useQuery(GET_DASHBOARD_DATA);
+  const { user, loading: authLoading } = useAuth();
+  const { data, loading, error } = useQuery(GET_DASHBOARD_DATA, {
+    skip: authLoading || !user,
+    fetchPolicy: "network-only",
+  });
 
-  if (loading) return <LoadingSpinner message="Loading dashboard..." />;
+  if (authLoading || loading) {
+    return <LoadingSpinner message="Loading dashboard..." />;
+  }
+
+  if (!user) {
+    return (
+      <div className={classes.error}>
+        Please sign in to view your dashboard.
+      </div>
+    );
+  }
   if (error)
     return (
       <div className={classes.error}>

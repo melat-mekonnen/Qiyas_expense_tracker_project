@@ -10,6 +10,7 @@ import { useQuery, useMutation } from "@apollo/client/react";
 import { GET_EXPENSES, DELETE_EXPENSE } from "@/graphql/client";
 import ExpenseCard from "@/components/ExpenseCard";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { useAuth } from "@/components/AuthProvider";
 import { CATEGORIES, classes } from "@/lib/theme";
 import Link from "next/link";
 
@@ -17,11 +18,21 @@ export default function ExpensesPage() {
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [deletingId, setDeletingId] = useState(null);
+  const { user, loading: authLoading } = useAuth();
 
-  const { data, loading, error, refetch } = useQuery(GET_EXPENSES);
+  const { data, loading, error, refetch } = useQuery(GET_EXPENSES, {
+    skip: authLoading || !user,
+    fetchPolicy: "network-only",
+  });
   const [deleteExpense] = useMutation(DELETE_EXPENSE);
 
-  if (loading) return <LoadingSpinner message="Loading expenses..." />;
+  if (authLoading || loading) {
+    return <LoadingSpinner message="Loading expenses..." />;
+  }
+
+  if (!user) {
+    return <div className={classes.error}>Please sign in to view expenses.</div>;
+  }
   if (error)
     return <div className={classes.error}>Error: {error.message}</div>;
 
